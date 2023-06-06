@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly, nullable) ZFLandscapeViewController *landscapeViewController;
 
-/// current device orientation observer is activie.
+/// current device orientation observer is active.
 @property (nonatomic, assign) BOOL activeDeviceObserver;
 
 - (void)interfaceOrientation:(UIInterfaceOrientation)orientation completion:(void(^ __nullable)(void))completion;
@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIView *)fullScreenContainerView;
 
-- (BOOL)isSuppprtInterfaceOrientation:(UIInterfaceOrientation)orientation;
+- (BOOL)isSupportInterfaceOrientation:(UIInterfaceOrientation)orientation;
 
 + (ZFInterfaceOrientationMask)supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window;
 

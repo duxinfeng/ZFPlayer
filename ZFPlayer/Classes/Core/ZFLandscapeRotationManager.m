@@ -89,7 +89,7 @@
     }
 }
 
-- (BOOL)isSuppprtInterfaceOrientation:(UIInterfaceOrientation)orientation {
+- (BOOL)isSupportInterfaceOrientation:(UIInterfaceOrientation)orientation {
     if (orientation == UIInterfaceOrientationPortrait) {
         return [self _isSupportedPortrait];
     } else if (orientation == UIInterfaceOrientationLandscapeLeft) {

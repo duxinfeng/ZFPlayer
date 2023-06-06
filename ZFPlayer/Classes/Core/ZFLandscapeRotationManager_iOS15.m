@@ -30,8 +30,8 @@
 }
 
 @property (nonatomic, strong, readonly) ZFLandscapeViewController_iOS15 *landscapeViewController;
-/// Force Rotaion, default NO.
-@property (nonatomic, assign) BOOL forceRotaion;
+/// Force Rotation, default NO.
+@property (nonatomic, assign) BOOL forceRotation;
 
 @end
 
@@ -48,7 +48,7 @@
 - (void)interfaceOrientation:(UIInterfaceOrientation)orientation completion:(void(^ __nullable)(void))completion {
     [super interfaceOrientation:orientation completion:completion];
     _rotateCompleted = completion;
-    self.forceRotaion = YES;
+    self.forceRotation = YES;
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
         SEL selector = NSSelectorFromString(@"setOrientation:");
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
@@ -88,11 +88,11 @@
 - (BOOL)allowsRotation {
     if (UIDeviceOrientationIsValidInterfaceOrientation([UIDevice currentDevice].orientation)) {
         UIInterfaceOrientation toOrientation = (UIInterfaceOrientation)[UIDevice currentDevice].orientation;
-        if (![self isSuppprtInterfaceOrientation:toOrientation]) {
+        if (![self isSupportInterfaceOrientation:toOrientation]) {
             return NO;
         }
     }
-    if (self.forceRotaion) { return YES; }
+    if (self.forceRotation) { return YES; }
     if (!self.activeDeviceObserver) { return NO; }
     if (self.allowOrientationRotation && !self.isLockedScreen) { return YES; }
     return NO;
@@ -110,7 +110,7 @@
 
 - (void)rotationFullscreenViewController:(ZFLandscapeViewController *)viewController viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     UIInterfaceOrientation toOrientation = (UIInterfaceOrientation)[UIDevice currentDevice].orientation;
-    if (![self isSuppprtInterfaceOrientation:toOrientation]) { return; }
+    if (![self isSupportInterfaceOrientation:toOrientation]) { return; }
     self.currentOrientation = toOrientation;
     UIView *playerSuperview = self.landscapeViewController.playerSuperview;
     if (UIInterfaceOrientationIsLandscape(toOrientation) && self.contentView.superview != playerSuperview) {
@@ -138,7 +138,7 @@
         if (self.disableAnimations) {
             [CATransaction commit];
         }
-        self.forceRotaion = NO;
+        self.forceRotation = NO;
         if (toOrientation == UIInterfaceOrientationPortrait) {
             UIView *snapshot = [self.contentView snapshotViewAfterScreenUpdates:NO];
             snapshot.frame = self.containerView.bounds;
